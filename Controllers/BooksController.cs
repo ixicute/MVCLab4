@@ -6,6 +6,7 @@ using Lab4.CustomIdentity;
 using Lab4.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lab4.Controllers
 {
@@ -20,6 +21,7 @@ namespace Lab4.Controllers
             context = _context;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var allBooks = await (from baRT in context.BookAuthorsRT
@@ -72,6 +74,7 @@ namespace Lab4.Controllers
             return View(booksList);
         }
 
+        [Authorize]
         public async Task<IActionResult> Borrow(int bookId = 1)
         {
             var book = await (from baRT in context.BookAuthorsRT
@@ -113,6 +116,7 @@ namespace Lab4.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> SubmitBorrow(int bookId)
         {
             var currentUser = userManager.GetUserAsync(User).Result;
@@ -137,7 +141,8 @@ namespace Lab4.Controllers
             TempData["Confirm"] = "An error occured. Try again later.";
             return RedirectToAction("Confirmation", "Home");
         }
-
+        
+        [Authorize]
         public async Task<IActionResult> MyBooks(bool allBorrowedBooks = false)
         {
 
@@ -206,6 +211,7 @@ namespace Lab4.Controllers
             return View(userBorrowedList);
         }
 
+        [Authorize]
         public async Task<IActionResult> ReturnBook(int cbRTID)
         {
             var bookToReturn = await context.CustomerBooksRT.FirstOrDefaultAsync(cbRT => cbRT.Id == cbRTID);
