@@ -1,0 +1,49 @@
+﻿@using Lab4.ViewModels
+@model List<UserDataViewModel>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h2>User List</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.FullName</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <a asp-action="EditUser" asp-controller="User" asp-route-userId="@user.Id" class="text-success">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-action="UsersById" asp-controller="User" asp-route-userId="@user.Id" class="text-info">Details</a>
+                    </td>
+                    <td>
+                        <a asp-action="RemoveUser" asp-controller="User" asp-route-userId="@user.Id" class="text-danger">Remove</a>
+                    </td>
+                    <td>
+                        <a asp-action="UserBooksById" asp-controller="User" asp-route-userId="@user.Id" class="text-primary">View borrowed books</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

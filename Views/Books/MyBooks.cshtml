@@ -1,0 +1,62 @@
+﻿@using Lab4.ViewModels
+@model List<BorrowedBooksViewModel>;
+
+
+<div class="mb-3">
+    <form asp-action="MyBooks" method="get">
+        <div class="form-check mt-2">
+            <input type="checkbox" class="form-check-input" name="allBorrowedBooks" value="true" />
+            <label class="form-check-label" for="allBorrowedBooks">Show all books</label>
+        </div>
+        <div class="input-group-append">
+            <input type="submit" value="Search" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    @foreach (var book in Model)
+    {
+        <div class="card mb-3" style="max-width: 510px; margin-right: 10px">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                    <img src="@book.BookImage" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><b>@book.BookTitle</b></h5>
+                        <p class="card-text"><b>Authored by:<br> <span class="card-text"><small class="text-danger">@book.BookAuthor</small></span></b></p>
+                        <p class="card-text"><b>Borrowed date:</b><br> <span class="text-primary">@(book.BorrowedDate.ToString("yyyy, MMMM, dd"))</span></p>
+                        @{
+                            int daysLeft = DateTime.Now.Date.Subtract(book.ReturnAt.Date).Days;
+                        }
+                        @if (!((bool)book.isReturned) && daysLeft < 0)
+                        {
+                            if (Math.Abs(daysLeft) <= 3)
+                            {
+                                <p><span class="text-danger">@(Math.Abs(daysLeft)) days left</span> to return</p>
+                            } else
+                            {
+                                <p><span class="text-primary">@(Math.Abs(daysLeft)) days left</span> to return</p>
+                            }
+                            <a asp-action="ReturnBook" asp-route-cbRTID="@book.CBRTId" class="btn btn-success">Return</a>
+                        }
+                        else if (!((bool)book.isReturned) && daysLeft == 0)
+                        {
+                            <p>Must be returned <span class="text-danger">today!</span></p>
+                            <a asp-action="ReturnBook" asp-route-cbRTID="@book.CBRTId" class="btn btn-success">Return</a>
+                        } else if ((bool)book.isReturned)
+                        {
+                            <p class="text-success">Book was returned.</p>
+
+                        } else if (!((bool)book.isReturned) && daysLeft > 0)
+                        {
+                            <p class="alert-danger">Return date passed. Please return the book to avoid suspension.</p>
+                            <a asp-action="ReturnBook" asp-route-cbRTID="@book.CBRTId" class="btn btn-danger">Return late</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

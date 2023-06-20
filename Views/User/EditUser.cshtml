@@ -1,0 +1,74 @@
+﻿@using Lab4.ViewModels
+@model UserViewModel;
+
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <h4 class="text-center text-info"><b>Update user data</b></h4>
+        <form asp-action="EditUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserFirstName" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="UserFirstName" class="form-control" />
+                <span asp-validation-for="UserFirstName" class="text-danger"></span><br />
+
+                <label asp-for="UserLastName" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="UserLastName" class="form-control" />
+                <span asp-validation-for="UserLastName" class="text-danger"></span><br />
+
+                <label asp-for="UserName" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span><br />
+                <label asp-for="Street" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="Street" class="form-control" />
+                <span asp-validation-for="Street" class="text-danger mb-2"></span><br />
+                <label asp-for="PostalCode" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="PostalCode" class="form-control" />
+                <span asp-validation-for="PostalCode" class="text-danger mb-2"></span><br />
+            </div>
+            <div class="form-group mb-3">
+                <label for="RoleList" class="form-label">Current user role:</label><span class="text-danger"> *</span>
+                <select asp-for="RoleId" id="RoleList" class="form-select">
+                    @foreach (var item in Model.RoleList)
+                    {
+                        if (item.Id == Model.RoleId)
+                        {
+                            <option value="@item.Id" selected>@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="RoleList" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="UserId" />
+
+            <div class="form-group">
+                <input class="btn btn-success float-right mt-2" type="submit" value="Update" />
+                <a class="btn btn-outline-secondary mt-2" asp-controller="User" asp-action="Index">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+</style>

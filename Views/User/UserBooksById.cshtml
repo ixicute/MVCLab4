@@ -1,0 +1,45 @@
+﻿@using Lab4.ViewModels
+@model List<BorrowedBooksViewModel>;
+
+
+<div class="row">
+    @if(Model.Count > 0)
+    {
+        @foreach (var book in Model)
+        {
+            <div class="card mb-3" style="max-width: 510px; margin-right: 10px">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex justify-content-center align-items-center">
+                        <img src="@book.BookImage" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-center"><b>@book.BookTitle</b></h5>
+                            <p class="card-text"><b>Authored by:<br> <span class="card-text"><small class="text-danger">@book.BookAuthor</small></span></b></p>
+                            <p class="card-text"><b>Borrowed date:</b><br> <span class="text-primary">@(book.BorrowedDate.ToString("yyyy, MMMM, dd"))</span></p>
+                            <p class="card-text"><b>Return date:</b><br> <span class="text-primary">@(book.ReturnAt.ToString("yyyy, MMMM, dd"))</span></p>
+                            <p class="card-text">
+                                <b>Borrow Status:</b><br>
+                                @if (book.isReturned == true)
+                                {
+                                    <span class="text-success">Book was returned</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">Book is still borrowed</span>
+                                }
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    } else
+    {
+        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+            <p class="alert-success text-center w-50">User has not borrowed any books yet.</p>
+        </div>
+    }
+
+</div>

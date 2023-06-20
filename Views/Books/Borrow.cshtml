@@ -1,0 +1,24 @@
+﻿@using Lab4.ViewModels
+@model BorrowViewModel
+
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 80%;">
+    <div class="card" style="width: 350px;">
+        <img src="@Model.BookImage" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-title text-center">@Model.BookTitle</p>
+            <form method="post" asp-action="SubmitBorrow" asp-route-bookId="@Model.BookId">
+                <p class="text-danger">Are you sure you want to borrow this book?</p>
+                <div class="row text-center">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success btn-block">Confirm</button>
+                    </div>
+                    <div class="col-6">
+                        <button asp-action="Index" asp-controller="Books" class="btn btn-danger btn-block">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

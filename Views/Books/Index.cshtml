@@ -1,0 +1,28 @@
+﻿@using Lab4.ViewModels
+@model List<BooksViewModel>;
+
+
+
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="card mb-3" style="max-width: 510px; margin-right: 10px">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex justify-content-center align-items-center">
+                        <img src="@book.BookImage" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">@book.BookTitle</h5>
+                            <p class="card-title">Description:</p>
+                            <p style="overflow:scroll; max-height:70px; " class="text-primary">@book.BookDescription</p>
+                            <p class="card-text">by:<br> <span class="card-text"><small class="text-danger">@book.BookAuthor</small></span></p>
+                            <a asp-action="Borrow" asp-route-bookId="@book.BookId" class="btn btn-success">Borrow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+

@@ -1,0 +1,73 @@
+﻿@using Lab4.ViewModels
+@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Sign up";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="logo-container">
+            <span class="logo-text">MA</span>
+        </div>
+        <h4 class="text-center text-info"><b>Register a new account</b></h4>
+        <form asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Firstname" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="Firstname" class="form-control" />
+                <span asp-validation-for="Firstname" class="text-danger"></span><br />
+
+                <label asp-for="Lastname" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="Lastname" class="form-control" />
+                <span asp-validation-for="Lastname" class="text-danger"></span><br />
+
+                <label asp-for="Username" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span><br />
+            </div>
+
+            <div class="form-group col-3">
+                <label asp-for="ConfirmPassword" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span><br />
+                <label asp-for="Street" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="Street" class="form-control" />
+                <span asp-validation-for="Street" class="text-danger mb-2"></span><br />
+                <label asp-for="PostalCode" class="control-label"></label><span class="text-danger"> *</span>
+                <input asp-for="PostalCode" class="form-control" />
+                <span asp-validation-for="PostalCode" class="text-danger mb-2"></span><br />
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-outline-success float-right mt-2" type="submit" value="Sign up" />
+                <a class="btn btn-outline-secondary mt-2" asp-controller="Home" asp-action="Index">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+</style>
